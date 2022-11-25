@@ -1,0 +1,11 @@
+---
+- name: disable swapoff
+  ansible.builtin.shell: sudo swapoff -a
+  
+- name: remove config.toml
+  ansible.builtin.raw: sudo rm /etc/containerd/config.toml
+
+- name: restart containerd
+  ansible.builtin.raw: sudo systemctl restart containerd
+
+

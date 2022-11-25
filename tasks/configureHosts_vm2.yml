@@ -1,0 +1,8 @@
+---
+- name: Insert new host aliases for vm2
+  lineinfile:
+    path: /etc/hosts
+    line: 129.114.25.172  group11-vm2 kubemaster kubeworker1
+    insertafter: 127.*
+  become: yes
+

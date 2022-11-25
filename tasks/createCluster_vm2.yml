@@ -1,0 +1,9 @@
+---
+- name: Initialize Cluster
+  ansible.builtin.raw: sudo kubeadm init --node-name kubemaster --pod-network-cidr=10.244.0.0/16
+- name: Make Directory .kube
+  ansible.builtin.raw: sudo mkdir -p $HOME/.kube
+- name: Copy admin.conf
+  ansible.builtin.raw: sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+- name: Change ownership 
+  ansible.builtin.raw: sudo chown $(id -u):$(id -g) $HOME/.kube/config

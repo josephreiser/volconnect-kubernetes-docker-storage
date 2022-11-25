@@ -1,0 +1,11 @@
+---
+- name: Copy deployment.yaml
+  copy:
+    src: ~/volunteerconnect/k8s/deployment.yaml
+    dest: ~/
+- name: Copy service.yaml
+  copy:
+    src: ~/volunteerconnect/k8s/service.yaml
+    dest: ~/
+
+    

@@ -1,0 +1,6 @@
+---
+- name: Create daemon.json file
+  ansible.builtin.copy:
+    dest: "/etc/docker/daemon.json"
+    content: '{"insecure-registries" : ["129.114.25.172:5000"]}'
+  become: yes

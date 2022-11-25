@@ -1,0 +1,43 @@
+---
+- name: "Play 1: Perform fact gathering on all VMs"
+  hosts: all
+  collections: 
+    - openstack.cloud
+    - ansible-base
+  remote_user: cc       
+  gather_facts: yes          
+  tasks:
+#    - include_tasks: tasks/installDocker.yml
+#      when: inventory_hostname in groups['MyChamVMs']  
+#    - include_tasks: tasks/installKubernetes.yml
+#      when: inventory_hostname in groups['MyChamVMs']  
+#    - include_tasks: tasks/configureKubernetes.yml
+#      when: inventory_hostname in groups['MyChamVMs'] 
+#    - include_tasks: tasks/configureHosts_vm2.yml
+#      when: inventory_hostname in groups['VM2']   
+#    - include_tasks: tasks/configureHosts_vm3.yml
+#      when: inventory_hostname in groups['VM3']   
+#    - include_tasks: tasks/disableSwapoff.yml
+#      when: inventory_hostname in groups['MyChamVMs']   
+#    - include_tasks: tasks/createCluster_vm2.yml
+#      when: inventory_hostname in groups['VM2']   
+#    - include_tasks: tasks/applyFlannel_vm2.yml
+#      when: inventory_hostname in groups['VM2'] 
+#    - include_tasks: tasks/generateToken_vm2.yml
+#      when: inventory_hostname in groups['VM2']
+#    - include_tasks: tasks/joinCluster_vm3.yml
+#      when: inventory_hostname in groups['VM3']
+#    - include_tasks: tasks/taintMaster_vm2.yml
+#      when: inventory_hostname in groups['VM2']
+#    - include_tasks: tasks/updateInsecureRegistries.yml
+#      when: inventory_hostname in groups['MyChamVMs']
+    - include_tasks: tasks/copyFiles.yml
+      when: inventory_hostname in groups['VM2']
+#    - include_tasks: tasks/deployServer.yml
+#      when: inventory_hostname in groups['VM2']
+
+      
+      
+
+
+...

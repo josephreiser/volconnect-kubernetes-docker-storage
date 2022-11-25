@@ -1,0 +1,15 @@
+---
+- name: edit docker.service file
+  ansible.builtin.replace:
+    path: /lib/systemd/system/docker.service
+    regexp: 'ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock'
+    replace: 'ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd'
+  become: yes
+  
+- name: systemctl daemon reload
+  ansible.builtin.raw: sudo systemctl daemon-reload
+  
+- name: systemctl restart docker 
+  ansible.builtin.raw: sudo systemctl restart docker
+
+

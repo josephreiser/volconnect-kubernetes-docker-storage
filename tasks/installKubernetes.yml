@@ -1,0 +1,22 @@
+---
+- name: apt update
+  ansible.builtin.command: sudo apt update
+  
+- name: install apt-transport-https
+  ansible.builtin.raw: sudo apt-get install -y apt-transport-https
+  become: yes
+  
+- name: kubernetes gpg key work
+  ansible.builtin.shell: sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  become: yes
+
+- name: Set up kubernetes repo
+  ansible.builtin.raw: echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+  become: yes
+
+- name: apt update
+  ansible.builtin.command: sudo apt update
+
+- name: install kubernetes
+  ansible.builtin.raw: sudo apt-get install -y kubeadm kubelet kubectl kubernetes-cni
+  become: yes

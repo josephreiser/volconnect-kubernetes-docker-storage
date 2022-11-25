@@ -1,0 +1,9 @@
+---
+- name: Deploy the docker image as a Deployment
+  ansible.builtin.shell: kubectl apply -f deployment.yaml
+- name: Pause for a minute
+  ansible.builtin.pause:
+    minutes: 1  
+- name: Expose the service to the outside world
+  ansible.builtin.shell: kubectl apply -f service.yaml
+

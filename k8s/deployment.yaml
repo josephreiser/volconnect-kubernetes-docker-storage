@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: volconnect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: volconnect
+  template:
+    metadata:
+      labels:
+        app: volconnect
+    spec:
+      containers:
+      - name: volconnect
+        image: jreiser123/volconnect-7
+        ports:
+        - containerPort: 80

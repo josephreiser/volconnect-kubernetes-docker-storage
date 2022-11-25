@@ -1,0 +1,8 @@
+---
+- name: Insert new host aliases for vm3
+  lineinfile:
+    path: /etc/hosts
+    line: 129.114.25.216  group11-vm3 kubeworker2
+    insertafter: 127.*
+  become: yes
+

@@ -1,0 +1,50 @@
+---
+- name: apt-get update
+  ansible.builtin.command: sudo apt-get update
+  
+- name: installing ca-certificates
+  ansible.builtin.raw: sudo apt-get install ca-certificates 
+
+
+- name: Update Cache, install curl, gnupg, lsb-release
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop:
+    - curl
+    - gnupg
+    - lsb-release
+  become: yes
+  
+- name: install gnupg
+  ansible.builtin.raw: sudo apt-get install gnupg
+  become: yes
+
+- name: install lsb-release
+  ansible.builtin.raw: sudo apt-get install lsb-release
+  become: yes
+
+- name: Make directory for gpg key
+  ansible.builtin.raw: sudo mkdir -p /etc/apt/keyrings
+  become: yes
+
+- name: Add docker GPG key
+  ansible.builtin.shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  become: yes
+
+- name: Set up repository
+  ansible.builtin.raw: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  become: yes
+
+- name: apt-get update
+  ansible.builtin.raw: sudo apt-get update
+  
+- name: install docker (finally)
+  ansible.builtin.raw: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  become: yes
+
+- name: try running hello world (validation)
+  ansible.builtin.raw: sudo docker run hello-world
+  
+
+    

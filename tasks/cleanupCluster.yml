@@ -1,0 +1,38 @@
+---
+- name: Pause for 2 minute before cleanup
+  ansible.builtin.pause:
+    minutes: 2
+- name: Remove Consumer Pod
+  ansible.builtin.shell: kubectl delete -f consumer.yaml
+- name: Remove Port Forwarding Service
+  ansible.builtin.shell: kubectl delete -f portService.yaml
+- name: Remove Couchdb Pod
+  ansible.builtin.shell: kubectl delete -f couchdb.yaml
+- name: Remove broker 4 pod 
+  ansible.builtin.shell: kubectl delete -f kafka4.yaml
+- name: Cleanup broker 4 service
+  ansible.builtin.shell: kubectl delete service kafka4-deployment
+- name: Remove broker 3 pod
+  ansible.builtin.shell: kubectl delete -f kafka3.yaml
+- name: Cleanup broker 3 service
+  ansible.builtin.shell: kubectl delete service kafka3-deployment
+- name: Remove broker 2 pod
+  ansible.builtin.shell: kubectl delete -f kafka2.yaml
+- name: Cleanup broker 2 service
+  ansible.builtin.shell: kubectl delete service kafka2-deployment
+- name: Remove broker 1 pod
+  ansible.builtin.shell: kubectl delete -f kafka1.yaml
+- name: Cleanup broker 1 service
+  ansible.builtin.shell: kubectl delete service kafka1-deployment
+- name: Remove broker 0 pod
+  ansible.builtin.shell: kubectl delete -f kafka0.yaml
+- name: Cleanup broker 0 service
+  ansible.builtin.shell: kubectl delete service kafka0-deployment
+- name: Remove zookeeper pod
+  ansible.builtin.shell: kubectl delete -f zookeeper.yaml
+- name: Cleanup zookeeper service
+  ansible.builtin.shell: kubectl delete service zookeeper-deployment
+- name: Stop docker service
+  ansible.builtin.raw: sudo service docker stop
+
+
