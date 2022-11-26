@@ -7,9 +7,15 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: port1
+    port: 80
     targetPort: 80
     protocol: TCP
     nodePort: 30000
+  - name: port2
+    port: 5000
+    targetPort: 5000
+    protocol: TCP
+    nodePort: 30001
   selector:
     app: volconnect
