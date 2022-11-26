@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: volconnect
-        image: jreiser123/volconnect-7
+        image: jreiser123/volconnect
         ports:
         - containerPort: 80
